@@ -99,19 +99,19 @@ export default function Portfolio() {
   };
 
   return (
-    <div className="min-h-screen bg-[#181818] text-[#eeeeee] font-sans flex flex-col md:flex-row px-12 pt-6 pb-4">
+    <div className="min-h-screen bg-[#181818] text-[#eeeeee] font-sans flex flex-col md:flex-row px-12 pt-6 pb-10 md:pb-4">
       {/* Sidebar */}
-      <aside className="md:w-1/2 w-full md:sticky md:top-0 h-full flex flex-col min-h-screen justify-between px-8 py-16 bg-[#181818]">
+      <aside className="text-center md:text-left md:w-1/2 w-full md:sticky md:top-0 h-full flex flex-col md:min-h-screen justify-between px-1 py-6 md:px-8 mb-6 md:mb-0 md:py-16 bg-[#181818]">
         <div>
-          <h1 className="text-8xl md:text-5xl font-bold mb-6">Hello,</h1>
-          <h2 className="text-5xl md:text-6xl font-bold mb-6">
-            I'm Varsha<span className="text-[#58a6ff]"> .</span>
+          <h1 className="text-3xl md:text-5xl font-bold mb-6">Hello,</h1>
+          <h2 className="text-4xl md:text-6xl font-bold md:mb-6">
+            I'm Varsha<span className="hidden ml-1 md:inline-block text-[#58a6ff]"> .</span>
           </h2>
-          <p className="mb-4 text-[#e0e0e0] max-w-md">
+          <p className="mt-4 mb-8 md:mt-0 md:mb-4 text-[#e0e0e0] max-w-md">
             A dedicated{" "}
             <span className="text-[#58a6ff]">Frontend engineer</span>.
           </p>
-          <p className="mb-12 text-[#cfcfcf] max-w-md">
+         <p className="mt-8 md:mt-0 mb-6 md:mb-12 text-[#cfcfcf] max-w-md text-lg md:text-base">
             I specialize in transforming complex ideas into intuitive,
             performant web applications. With a strong foundation in UI
             development, animation, and responsive design, I am committed to
@@ -119,7 +119,7 @@ export default function Portfolio() {
             impact.
           </p>
 
-          <nav className="mb-6 flex flex-col gap-4 text-[#bbbbbb] uppercase tracking-widest text-xs">
+          <nav className="hidden md:flex mb-6 flex-col gap-4 text-[#bbbbbb] uppercase tracking-widest text-xs">
             <a href="#projects" className="hover:text-[#58a6ff]">
               Projects
             </a>
@@ -137,7 +137,7 @@ export default function Portfolio() {
             </a>
           </nav>
         </div>
-        <div className="flex items-center gap-4 mt-10">
+        <div className="hidden md:flex justify-center md:justify-start items-center gap-4 mb-8 md:mb-0 mt-8">
           <RxAvatar size={36} />
           <a href="https://github.com/dhvarshaa/" className="hover:underline">
             <FaGithub size={20} color="#58a6ff" />
@@ -157,10 +157,10 @@ export default function Portfolio() {
         </div>
       </aside>
       {/* Main Content */}
-      <main className="md:w-1/2 w-full flex flex-col gap-24 py-16 px-8 ">
+      <main className="md:w-1/2 w-full flex flex-col gap-16 md:gap-24 md:py-16 md:px-8 ">
         {/* Projects */}
         <section id="projects">
-          <h2 className="text-3xl font-bold mb-6">Projects</h2>
+          <h2 className="text-center md:text-left text-3xl font-bold mb-6">Projects</h2>
           <div className="flex flex-col gap-8">
             {projects.map((project, idx) => (
               <motion.div
@@ -191,7 +191,7 @@ export default function Portfolio() {
         </section>
         {/* Skills */}
         <section id="skills">
-          <h2 className="text-3xl font-bold mb-6">Skills</h2>
+          <h2 className="text-center md:text-left text-3xl font-bold mb-6">Skills</h2>
           <div className="flex flex-wrap gap-4 justify-items-center">
             {skills.map((skill) => (
               <motion.span
@@ -206,7 +206,7 @@ export default function Portfolio() {
         </section>
         {/* Experience */}
         <section id="experience">
-          <h2 className="text-3xl font-bold mb-6">Experience</h2>
+          <h2 className="text-center md:text-left text-3xl font-bold mb-6">Experience</h2>
           <div className="space-y-6">
             {experienceTimeline.map((item, i) => (
               <motion.div
@@ -230,7 +230,7 @@ export default function Portfolio() {
 
         {/* Eductaion */}
         <section id="education">
-          <h2 className="text-3xl font-bold mb-6">Education</h2>
+          <h2 className="text-center md:text-left text-3xl font-bold mb-6">Education</h2>
           <div className="space-y-6">
             <motion.div
               className="border-l-4 border-[#58a6ff] pl-4"
@@ -257,7 +257,7 @@ export default function Portfolio() {
 
         {/* Contact */}
         <section id="contact">
-          <h2 className="text-3xl font-bold mb-6">Contact</h2>
+          <h2 className="text-center md:text-left text-3xl font-bold mb-6">Contact</h2>
           <form
             className="flex flex-col max-w-lg gap-4"
             onSubmit={handleSubmit}
