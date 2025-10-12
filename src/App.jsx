@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import "./App.css";
 import { SiLeetcode } from "react-icons/si";
@@ -17,7 +18,7 @@ const projects = [
     type: "Next.js / Framer Motion",
     description:
       "A modern interactive portfolio built with Next.js and Framer Motion, featuring dynamic showcases and engaging transitions.",
-    href: "https://github.com/dhvarshaa/new-portfolio",
+    href: "#",
   },
   // {
   //   title: "Animated Portfolio",
@@ -72,6 +73,31 @@ const skills = [
 ];
 
 export default function Portfolio() {
+  const [status, setStatus] = useState(""); // success/error message
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    fetch("https://formspree.io/f/mgvnpewn", {
+      method: "POST",
+      body: formData,
+      headers: {
+        Accept: "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          setStatus("Thanks for your message! I'll get back soon.");
+          e.target.reset();
+        } else {
+          setStatus("Oops! There was a problem submitting your form.");
+        }
+      })
+      .catch(() => {
+        setStatus("Oops! There was a problem submitting your form.");
+      });
+  };
+
   return (
     <div className="min-h-screen bg-[#181818] text-[#eeeeee] font-sans flex flex-col md:flex-row px-12 pt-6 pb-4">
       {/* Sidebar */}
@@ -109,7 +135,6 @@ export default function Portfolio() {
             <a href="#contact" className="hover:text-[#58a6ff]">
               Contact
             </a>
-            
           </nav>
         </div>
         <div className="flex items-center gap-4 mt-10">
@@ -146,7 +171,9 @@ export default function Portfolio() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.3, delay: idx * 0.1 }}
               >
-                <span className="text-xs text-[#aaaaaa] mb-1">{project.type}</span>
+                <span className="text-xs text-[#aaaaaa] mb-1">
+                  {project.type}
+                </span>
                 <h3 className="text-lg font-bold mb-1">{project.title}</h3>
                 <p className="text-base text-[#bbb]">{project.description}</p>
                 <div className="mt-2 text-sm flex gap-4">
@@ -231,15 +258,20 @@ export default function Portfolio() {
         {/* Contact */}
         <section id="contact">
           <h2 className="text-3xl font-bold mb-6">Contact</h2>
-          <form className="flex flex-col max-w-lg gap-4">
+          <form
+            className="flex flex-col max-w-lg gap-4"
+            onSubmit={handleSubmit}
+          >
             <input
               required
               type="text"
+              name="name"
               placeholder="Your Name"
               className="py-2 px-4 rounded bg-[#232323] text-[#eee] border border-[#343434] focus:border-[#58a6ff] outline-none"
             />
             <input
               required
+              name="email"
               type="email"
               placeholder="Your Email"
               className="py-2 px-4 rounded bg-[#232323] text-[#eee] border border-[#343434] focus:border-[#58a6ff] outline-none"
@@ -255,6 +287,7 @@ export default function Portfolio() {
             >
               Send Message
             </button>
+            {status && <p className="mt-2 text-green-500">{status}</p>}
           </form>
         </section>
       </main>
