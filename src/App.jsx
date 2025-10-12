@@ -17,7 +17,7 @@ const projects = [
     type: "Next.js / Framer Motion",
     description:
       "A modern interactive portfolio built with Next.js and Framer Motion, featuring dynamic showcases and engaging transitions.",
-    href: "https://github.com/dhvarshaa/portfolio",
+    href: "https://github.com/dhvarshaa/new-portfolio",
   },
   // {
   //   title: "Animated Portfolio",
