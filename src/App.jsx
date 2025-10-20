@@ -246,7 +246,7 @@ export default function Portfolio() {
                   target="_blank"
                   className="text-[#58a6ff]"
                 >
-                  @IGDTUW, Delhi
+                  {' '}@ IGDTUW, Delhi
                 </a>
                 <p className="text-xs mb-2">(Aug 2018 - Jul 2022)</p>
               </h3>
