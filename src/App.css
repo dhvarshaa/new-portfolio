@@ -1,7 +1,10 @@
 @import "tailwindcss";
 
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins';
+    margin: 0;
+    padding:0;
+    background-color: #181818;
 }
 
 .App{
