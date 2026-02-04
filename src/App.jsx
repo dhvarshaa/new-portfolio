@@ -104,11 +104,19 @@ export default function Portfolio() {
 
   // Add structured data for SEO
   useEffect(() => {
-    const structuredData = {
+    // Person schema
+    const personSchema = {
       "@context": "https://schema.org",
       "@type": "Person",
       name: "Varsha",
       jobTitle: "Frontend Engineer",
+      email: "varshadhama21@gmail.com",
+      telephone: "+91-9717317670",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Delhi",
+        addressCountry: "IN",
+      },
       worksFor: {
         "@type": "Organization",
         name: "BharatPe",
@@ -134,16 +142,67 @@ export default function Portfolio() {
       url: "https://varshadhama.vercel.app/",
     };
 
-    const script = document.createElement("script");
-    script.type = "application/ld+json";
-    script.text = JSON.stringify(structuredData);
-    document.head.appendChild(script);
+    // WebSite schema
+    const websiteSchema = {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: "Varsha's Portfolio",
+      url: "https://varshadhama.vercel.app/",
+      description: "Frontend Engineer specializing in React, Next.js, and TypeScript",
+      author: {
+        "@type": "Person",
+        name: "Varsha",
+      },
+    };
+
+    // BreadcrumbList schema
+    const breadcrumbSchema = {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://varshadhama.vercel.app/",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Experience",
+          item: "https://varshadhama.vercel.app/#experience",
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "Skills",
+          item: "https://varshadhama.vercel.app/#skills",
+        },
+        {
+          "@type": "ListItem",
+          position: 4,
+          name: "Projects",
+          item: "https://varshadhama.vercel.app/#projects",
+        },
+      ],
+    };
+
+    const schemas = [personSchema, websiteSchema, breadcrumbSchema];
+
+    const scripts = schemas.map((schema) => {
+      const script = document.createElement("script");
+      script.type = "application/ld+json";
+      script.text = JSON.stringify(schema);
+      document.head.appendChild(script);
+      return script;
+    });
 
     return () => {
-      // Safely remove script if it still exists
-      if (script.parentNode) {
-        document.head.removeChild(script);
-      }
+      scripts.forEach((script) => {
+        if (script.parentNode) {
+          document.head.removeChild(script);
+        }
+      });
     };
   }, []);
 
@@ -329,9 +388,12 @@ export default function Portfolio() {
                           <p className="text-sm text-[#aaa] mb-2">{item.team}</p>
                         )}
                       </div>
-                      <span className="text-sm text-[#888] font-medium bg-[#24262e] px-3 py-1 rounded-full inline-block md:mt-0 mt-2 w-fit">
+                      <time 
+                        dateTime={item.year.includes("Present") ? item.year.split(" - ")[0] + "/" : item.year.replace(" - ", "/")}
+                        className="text-sm text-[#888] font-medium bg-[#24262e] px-3 py-1 rounded-full inline-block md:mt-0 mt-2 w-fit"
+                      >
                         {item.year}
-                      </span>
+                      </time>
                     </div>
                     <ul className="space-y-2 mt-4">
                       {item.achievements.map((achievement, idx) => (
@@ -474,9 +536,12 @@ export default function Portfolio() {
                       @ IGDTUW, Delhi
                     </a>
                   </div>
-                  <span className="text-sm text-[#888] font-medium bg-[#24262e] px-3 py-1 rounded-full inline-block md:mt-0 mt-2 w-fit">
+                  <time 
+                    dateTime="2018-08-01/2022-07-31"
+                    className="text-sm text-[#888] font-medium bg-[#24262e] px-3 py-1 rounded-full inline-block md:mt-0 mt-2 w-fit"
+                  >
                     Aug 2018 - Jul 2022
-                  </span>
+                  </time>
                 </div>
                 <p className="text-[#bbb] mt-2">Information Technology</p>
               </div>
