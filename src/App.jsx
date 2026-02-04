@@ -7,6 +7,13 @@ import { RxAvatar } from "react-icons/rx";
 
 const projects = [
   {
+    title: "Frontend Code Snippets",
+    type: "React.js / JavaScript / Performance Optimization",
+    description:
+      "An interactive code snippets library showcasing React hooks, JavaScript patterns, and best practices. Features lazy loading, memoization, syntax highlighting, and search functionality. Built as a technical reference guide demonstrating advanced React concepts and performance optimization techniques.",
+    href: "https://frontend-code-snippets.vercel.app/",
+  },
+  {
     title: "Vistagram",
     type: "React.js / Node.js / Express.js / SQLite",
     description:
