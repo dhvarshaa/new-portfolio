@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import "./App.css";
 import { SiLeetcode } from "react-icons/si";
@@ -75,6 +75,51 @@ const skills = [
 export default function Portfolio() {
   const [status, setStatus] = useState(""); // success/error message
 
+  // Add structured data for SEO
+  useEffect(() => {
+    const structuredData = {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      name: "Varsha",
+      jobTitle: "Frontend Engineer",
+      worksFor: {
+        "@type": "Organization",
+        name: "BharatPe",
+      },
+      alumniOf: {
+        "@type": "EducationalOrganization",
+        name: "Indira Gandhi Delhi Technical University for Women",
+        url: "https://www.igdtuw.ac.in/",
+      },
+      knowsAbout: [
+        "React",
+        "Next.js",
+        "JavaScript",
+        "TypeScript",
+        "Frontend Development",
+        "UI/UX",
+      ],
+      sameAs: [
+        "https://github.com/dhvarshaa/",
+        "https://www.linkedin.com/in/varshadhama/",
+        "https://leetcode.com/u/dhvarshaa/",
+      ],
+      url: "https://varshadhama.vercel.app/",
+    };
+
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.text = JSON.stringify(structuredData);
+    document.head.appendChild(script);
+
+    return () => {
+      // Safely remove script if it still exists
+      if (script.parentNode) {
+        document.head.removeChild(script);
+      }
+    };
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -119,40 +164,52 @@ export default function Portfolio() {
             impact.
           </p>
 
-          <nav className="hidden md:flex mb-6 flex-col gap-4 text-[#bbbbbb] uppercase tracking-widest text-xs">
-            <a href="#projects" className="hover:text-[#58a6ff]">
+          <nav className="hidden md:flex mb-6 flex-col gap-4 text-[#bbbbbb] uppercase tracking-widest text-xs" aria-label="Main navigation">
+            <a href="#projects" className="hover:text-[#58a6ff]" aria-label="Navigate to Projects section">
               Projects
             </a>
-            <a href="#skills" className="hover:text-[#58a6ff]">
+            <a href="#skills" className="hover:text-[#58a6ff]" aria-label="Navigate to Skills section">
               Skills
             </a>
-            <a href="#experience" className="hover:text-[#58a6ff]">
+            <a href="#experience" className="hover:text-[#58a6ff]" aria-label="Navigate to Experience section">
               Experience
             </a>
-            <a href="#education" className="hover:text-[#58a6ff]">
+            <a href="#education" className="hover:text-[#58a6ff]" aria-label="Navigate to Education section">
               Education
             </a>
-            <a href="#contact" className="hover:text-[#58a6ff]">
+            <a href="#contact" className="hover:text-[#58a6ff]" aria-label="Navigate to Contact section">
               Contact
             </a>
           </nav>
         </div>
         <div className="hidden md:flex justify-center md:justify-start items-center gap-4 mb-8 md:mb-0 mt-8">
           <RxAvatar size={36} />
-          <a href="https://github.com/dhvarshaa/" className="hover:underline">
-            <FaGithub size={20} color="#58a6ff" />
+          <a 
+            href="https://github.com/dhvarshaa/" 
+            className="hover:underline"
+            aria-label="Visit Varsha's GitHub profile"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaGithub size={20} color="#58a6ff" aria-hidden="true" />
           </a>
           <a
             href="https://www.linkedin.com/in/varshadhama/"
             className="hover:underline"
+            aria-label="Visit Varsha's LinkedIn profile"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <FaLinkedin size={20} color="#58a6ff" />
+            <FaLinkedin size={20} color="#58a6ff" aria-hidden="true" />
           </a>
           <a
             href="https://leetcode.com/u/dhvarshaa/"
             className="hover:underline"
+            aria-label="Visit Varsha's LeetCode profile"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <SiLeetcode size={20} color="#58a6ff" />
+            <SiLeetcode size={20} color="#58a6ff" aria-hidden="true" />
           </a>
         </div>
       </aside>
@@ -180,7 +237,9 @@ export default function Portfolio() {
                   <a
                     href={project.href}
                     target="_blank"
+                    rel="noopener noreferrer"
                     className="text-[#58a6ff] underline"
+                    aria-label={`View ${project.title} project`}
                   >
                     Project
                   </a>
@@ -244,7 +303,9 @@ export default function Portfolio() {
                 <a
                   href="https://www.igdtuw.ac.in/"
                   target="_blank"
+                  rel="noopener noreferrer"
                   className="text-[#58a6ff]"
+                  aria-label="Visit IGDTUW website"
                 >
                   {' '}@ IGDTUW, Delhi
                 </a>
@@ -261,25 +322,36 @@ export default function Portfolio() {
           <form
             className="flex flex-col max-w-lg gap-4"
             onSubmit={handleSubmit}
+            aria-label="Contact form"
           >
+            <label htmlFor="name" className="sr-only">Your Name</label>
             <input
               required
+              id="name"
               type="text"
               name="name"
               placeholder="Your Name"
               className="py-2 px-4 rounded bg-[#232323] text-[#eee] border border-[#343434] focus:border-[#58a6ff] outline-none"
+              aria-required="true"
             />
+            <label htmlFor="email" className="sr-only">Your Email</label>
             <input
               required
+              id="email"
               name="email"
               type="email"
               placeholder="Your Email"
               className="py-2 px-4 rounded bg-[#232323] text-[#eee] border border-[#343434] focus:border-[#58a6ff] outline-none"
+              aria-required="true"
             />
+            <label htmlFor="message" className="sr-only">Your Message</label>
             <textarea
               required
+              id="message"
+              name="message"
               placeholder="Your Message"
               className="py-2 px-4 rounded bg-[#232323] text-[#eee] border border-[#343434] focus:border-[#58a6ff] outline-none min-h-[100px]"
+              aria-required="true"
             />
             <button
               type="submit"
